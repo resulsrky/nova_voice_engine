@@ -1,3 +1,0 @@
-/home/raulmoriarty/CLionProjects/voice_engine/build/CMakeFiles/voice_engine.dir
-/home/raulmoriarty/CLionProjects/voice_engine/build/CMakeFiles/edit_cache.dir
-/home/raulmoriarty/CLionProjects/voice_engine/build/CMakeFiles/rebuild_cache.dir

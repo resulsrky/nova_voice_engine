@@ -8,7 +8,20 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(OPUS REQUIRED opus)
 pkg_check_modules(PORTAUDIO REQUIRED portaudio-2.0)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
+set(SOURCES
+    src/app/application.cpp
+    src/app/main.cpp
+    src/capture/audio_capturer.cpp
+    src/codec/opus_codec.cpp
+    src/core/packet.cpp
+    src/network/udp_receiver.cpp
+    src/network/udp_sender.cpp
+    src/playback/audio_player.cpp
+    src/processing/echo_canceller.cpp
+    src/processing/noise_suppressor.cpp
+    src/streaming/collector.cpp
+    src/streaming/slicer.cpp
+)
 
 add_executable(voice_engine ${SOURCES})
 
