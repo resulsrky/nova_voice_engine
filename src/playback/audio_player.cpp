@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <cstring>
 
+
 namespace playback {
 
 AudioPlayer::AudioPlayer() = default;
@@ -48,6 +49,10 @@ bool AudioPlayer::is_playing() const {
     return is_playing_;
 }
 
+void AudioPlayer::set_playback_callback(PlaybackCallback cb) {
+    playback_callback_ = std::move(cb);
+}
+
 int AudioPlayer::pa_callback(const void*, void* o, unsigned long f, const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void* u) {
     return static_cast<AudioPlayer*>(u)->process(static_cast<int16_t*>(o), f);
 }
@@ -60,6 +65,9 @@ int AudioPlayer::process(int16_t* outputBuffer, unsigned long framesPerBuffer) {
         audio_buffer_.erase(audio_buffer_.begin(), audio_buffer_.begin() + samples_needed);
     } else {
         std::memset(outputBuffer, 0, samples_needed * sizeof(int16_t));
+    }
+    if (playback_callback_) {
+        playback_callback_(std::vector<int16_t>(outputBuffer, outputBuffer + samples_needed));
     }
     return paContinue;
 }

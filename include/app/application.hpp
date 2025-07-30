@@ -9,6 +9,8 @@
 #include "network/udp_sender.hpp"
 #include "network/udp_receiver.hpp"
 #include "playback/audio_player.hpp"
+#include "processing/echo_canceller.hpp"
+#include "processing/noise_suppressor.hpp"
 #include <string>
 #include <memory>
 #include <vector>
@@ -32,6 +34,8 @@ namespace app {
         std::unique_ptr<network::UdpReceiver>   receiver_;
         std::unique_ptr<streaming::Collector>   collector_;
         std::unique_ptr<playback::AudioPlayer>  player_;
+        std::unique_ptr<processing::EchoCanceller> echo_canceller_;
+        std::unique_ptr<processing::NoiseSuppressor> noise_suppressor_;
     };
 }
 

@@ -110,13 +110,14 @@ MIT License. See LICENSE for details.
 Developed as part of the SafeRoom Project and NovaEngine by Abdurrahman Karadağ and contributors.
 
 💡 Coming Soon
-Echo cancellation (AEC)
-
 VAD (Voice Activity Detection)
 
-Noise suppression module
-
 Live encryption key rotation
+
+💡 New Features
+Echo cancellation (AEC)
+
+Noise suppression module
 
 
 Let me know if you want this in lightweight markdown format, or if you'd like a split into separate `README`, `INSTALL.md`, and `ARCHITECTURE.md` files for documentation clarity.
