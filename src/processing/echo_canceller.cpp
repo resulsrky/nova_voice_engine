@@ -1,12 +1,14 @@
 #include "processing/echo_canceller.hpp"
 #include <algorithm>
 #include <cmath>
+#include <mutex>
 
 namespace processing {
 EchoCanceller::EchoCanceller(size_t max_delay_samples)
     : max_delay_(max_delay_samples) {}
 
 void EchoCanceller::on_playback(const std::vector<int16_t>& samples) {
+    std::lock_guard<std::mutex> lock(mutex_);
     echo_buffer_.insert(echo_buffer_.end(), samples.begin(), samples.end());
     if (echo_buffer_.size() > max_delay_) {
         echo_buffer_.erase(echo_buffer_.begin(), echo_buffer_.end() - max_delay_);
@@ -14,6 +16,7 @@ void EchoCanceller::on_playback(const std::vector<int16_t>& samples) {
 }
 
 void EchoCanceller::process(std::vector<int16_t>& capture) {
+    std::lock_guard<std::mutex> lock(mutex_);
     size_t n = std::min(capture.size(), echo_buffer_.size());
     for (size_t i = 0; i < n; ++i) {
         int val = capture[i] - echo_buffer_[i];
