@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstdint>
 #include <mutex>
+#include <functional>
 
 namespace playback {
     class AudioPlayer : private core::NonCopyable {
@@ -18,10 +19,13 @@ namespace playback {
         AudioPlayer();
         ~AudioPlayer();
 
+        using PlaybackCallback = std::function<void(const std::vector<int16_t>&)>;
+
         bool start();
         void stop();
         void submit_audio_data(const std::vector<int16_t>& audio_data);
         bool is_playing() const;
+        void set_playback_callback(PlaybackCallback cb);
 
     private:
         static int pa_callback(const void*, void*, unsigned long, const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void*);
@@ -32,6 +36,7 @@ namespace playback {
 
         std::vector<int16_t> audio_buffer_;
         std::mutex buffer_mutex_;
+        PlaybackCallback playback_callback_;
     };
 }
 

@@ -4,13 +4,18 @@
 namespace app {
 Application::Application() {
     try {
-        capturer_  = std::make_unique<capture::AudioCapturer>();
-        codec_     = std::make_unique<codec::OpusCodec>();
-        slicer_    = std::make_unique<streaming::Slicer>();
-        sender_    = std::make_unique<network::UdpSender>();
-        receiver_  = std::make_unique<network::UdpReceiver>();
-        collector_ = std::make_unique<streaming::Collector>();
-        player_    = std::make_unique<playback::AudioPlayer>();
+        capturer_        = std::make_unique<capture::AudioCapturer>();
+        codec_           = std::make_unique<codec::OpusCodec>();
+        slicer_          = std::make_unique<streaming::Slicer>();
+        sender_          = std::make_unique<network::UdpSender>();
+        receiver_        = std::make_unique<network::UdpReceiver>();
+        collector_       = std::make_unique<streaming::Collector>();
+        player_          = std::make_unique<playback::AudioPlayer>();
+        echo_canceller_  = std::make_unique<processing::EchoCanceller>();
+        noise_suppressor_= std::make_unique<processing::NoiseSuppressor>();
+        player_->set_playback_callback([this](const std::vector<int16_t>& data){
+            echo_canceller_->on_playback(data);
+        });
     } catch (const std::exception& e) {
         std::cerr << "Uygulama başlatılırken kritik hata: " << e.what() << std::endl;
         throw;
@@ -41,7 +46,10 @@ void Application::run(const std::string& target_ip, int send_port, int listen_po
 }
 
 void Application::on_audio_captured(const std::vector<int16_t>& pcm_data) {
-    auto encoded_data = codec_->encode(pcm_data);
+    std::vector<int16_t> processed = pcm_data;
+    echo_canceller_->process(processed);
+    noise_suppressor_->process(processed);
+    auto encoded_data = codec_->encode(processed);
     if (encoded_data.empty()) return;
     auto packets = slicer_->slice(encoded_data, 1200);
     sender_->send(packets);
