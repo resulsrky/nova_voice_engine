@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstddef>
+#include <mutex>
 
 namespace processing {
     class EchoCanceller {
@@ -14,6 +15,7 @@ namespace processing {
     private:
         std::vector<int16_t> echo_buffer_;
         size_t max_delay_;
+        std::mutex mutex_;
     };
 }
 
