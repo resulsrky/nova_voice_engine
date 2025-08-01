@@ -13,6 +13,7 @@ Application::Application() {
         player_          = std::make_unique<playback::AudioPlayer>();
         echo_canceller_  = std::make_unique<processing::EchoCanceller>();
         noise_suppressor_= std::make_unique<processing::NoiseSuppressor>();
+        vad_             = std::make_unique<processing::VoiceActivityDetector>();
         player_->set_playback_callback([this](const std::vector<int16_t>& data){
             echo_canceller_->on_playback(data);
         });
@@ -56,20 +57,33 @@ void Application::on_audio_captured(const std::vector<int16_t>& pcm_data) {
     
     // Audio processing pipeline
     try {
+        // 1. Echo Cancellation (önce echo'yu temizle)
         echo_canceller_->process(processed);
+        
+        // 2. Voice Activity Detection (ses var mı kontrol et)
+        bool voice_detected = vad_->detect_voice(processed);
+        
+        if (!voice_detected) {
+            // Ses yok - gönderme (bandwidth tasarrufu + gürültü azaltma)
+            return;
+        }
+        
+        // 3. Noise Suppression (sadece ses varken uygula)
         noise_suppressor_->process(processed);
         
+        // 4. Codec encoding
         auto encoded_data = codec_->encode(processed);
         if (encoded_data.empty()) {
             std::cerr << "UYARI: Codec encoding başarısız." << std::endl;
             return;
         }
         
-        // Daha küçük paket boyutu - daha iyi network performance
+        // 5. Network transmission
         auto packets = slicer_->slice(encoded_data, 1000);
         if (!packets.empty()) {
             sender_->send(packets);
         }
+        
     } catch (const std::exception& e) {
         std::cerr << "Audio processing hatası: " << e.what() << std::endl;
     }

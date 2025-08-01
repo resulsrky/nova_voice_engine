@@ -11,6 +11,7 @@
 #include "playback/audio_player.hpp"
 #include "processing/echo_canceller.hpp"
 #include "processing/noise_suppressor.hpp"
+#include "processing/voice_activity_detector.hpp"
 #include <string>
 #include <memory>
 #include <vector>
@@ -36,6 +37,7 @@ namespace app {
         std::unique_ptr<playback::AudioPlayer>  player_;
         std::unique_ptr<processing::EchoCanceller> echo_canceller_;
         std::unique_ptr<processing::NoiseSuppressor> noise_suppressor_;
+        std::unique_ptr<processing::VoiceActivityDetector> vad_;
     };
 }
 

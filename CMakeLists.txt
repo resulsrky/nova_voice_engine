@@ -19,6 +19,7 @@ set(SOURCES
     src/playback/audio_player.cpp
     src/processing/echo_canceller.cpp
     src/processing/noise_suppressor.cpp
+    src/processing/voice_activity_detector.cpp
     src/streaming/collector.cpp
     src/streaming/slicer.cpp
 )

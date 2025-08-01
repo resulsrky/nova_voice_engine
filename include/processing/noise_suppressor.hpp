@@ -13,6 +13,9 @@ namespace processing {
         float threshold_;
         float noise_level_;
         float alpha_;
+        int silence_counter_;
+        float noise_gate_threshold_;
+        float noise_reduction_factor_;
     };
 }
 

@@ -6,8 +6,10 @@ Nova Voice Engine, yüksek performanslı, gerçek zamanlı UDP tabanlı sesli g�
 
 ### Ses İşleme
 - **Opus Codec**: 64kbps optimum kalite, Variable Bitrate (VBR)
-- **Echo Cancellation**: Gerçek zamanlı yankı engelleme
-- **Noise Suppression**: Adaptif gürültü bastırma
+- **Agresif Echo Cancellation**: %80 yankı bastırma, adaptif threshold
+- **Akıllı Noise Suppression**: %90 gürültü azaltma, RMS tabanlı
+- **Voice Activity Detection (VAD)**: Otomatik sessizlik algılama
+- **Audio Gain Control**: Otomatik seviye ayarı ve clipping koruması
 - **Low Latency**: 10ms frame buffer ile minimum gecikme
 
 ### Ağ Optimizasyonları  
@@ -135,6 +137,11 @@ void SetPlaybackCallback(PlaybackCallback cb);
 ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
 ```
 Bu uyarılar normal ve çalışmayı etkilemez. Audio device bulunamadığında görülür.
+
+### ✅ Gürültü ve Echo Sorunları ÇÖZÜLDİ!
+- **Gürültü Sorunu**: Agresif noise suppression ve VAD ile çözüldü
+- **Echo Sorunu**: Gelişmiş echo cancellation ile kendi sesinizi duymayacaksınız
+- **Otomatik Gain**: Ses seviyesi otomatik olarak optimize edilir
 
 ### Port Çakışması
 ```

@@ -16,6 +16,9 @@ namespace processing {
         std::vector<int16_t> echo_buffer_;
         size_t max_delay_;
         std::mutex mutex_;
+        float echo_suppression_factor_;
+        float adaptive_threshold_;
+        float learning_rate_;
     };
 }
 
