@@ -42,6 +42,20 @@ void AudioPlayer::stop() {
 
 void AudioPlayer::submit_audio_data(const std::vector<int16_t>& audio_data) {
     std::lock_guard<std::mutex> lock(buffer_mutex_);
+    
+    // Buffer overflow protection
+    const size_t max_buffer_size = SAMPLE_RATE * NUM_CHANNELS * 2; // 2 saniye max buffer
+    if (audio_buffer_.size() + audio_data.size() > max_buffer_size) {
+        // Eski veriyi sil, yeni veriyi ekle (minimum latency için)
+        size_t excess = (audio_buffer_.size() + audio_data.size()) - max_buffer_size;
+        if (excess < audio_buffer_.size()) {
+            audio_buffer_.erase(audio_buffer_.begin(), audio_buffer_.begin() + excess);
+        } else {
+            audio_buffer_.clear();
+        }
+        std::cout << "UYARI: Audio buffer overflow, eski veriler temizlendi." << std::endl;
+    }
+    
     audio_buffer_.insert(audio_buffer_.end(), audio_data.begin(), audio_data.end());
 }
 
@@ -60,12 +74,23 @@ int AudioPlayer::pa_callback(const void*, void* o, unsigned long f, const PaStre
 int AudioPlayer::process(int16_t* outputBuffer, unsigned long framesPerBuffer) {
     std::lock_guard<std::mutex> lock(buffer_mutex_);
     const size_t samples_needed = framesPerBuffer * NUM_CHANNELS;
+    
     if (audio_buffer_.size() >= samples_needed) {
         std::memcpy(outputBuffer, audio_buffer_.data(), samples_needed * sizeof(int16_t));
         audio_buffer_.erase(audio_buffer_.begin(), audio_buffer_.begin() + samples_needed);
     } else {
-        std::memset(outputBuffer, 0, samples_needed * sizeof(int16_t));
+        // Underrun protection - kısmen dolu buffer'ı kullan
+        if (!audio_buffer_.empty()) {
+            std::memcpy(outputBuffer, audio_buffer_.data(), audio_buffer_.size() * sizeof(int16_t));
+            std::memset(outputBuffer + audio_buffer_.size(), 0, 
+                       (samples_needed - audio_buffer_.size()) * sizeof(int16_t));
+            audio_buffer_.clear();
+        } else {
+            // Tamamen boş buffer - silence
+            std::memset(outputBuffer, 0, samples_needed * sizeof(int16_t));
+        }
     }
+    
     if (playback_callback_) {
         playback_callback_(std::vector<int16_t>(outputBuffer, outputBuffer + samples_needed));
     }

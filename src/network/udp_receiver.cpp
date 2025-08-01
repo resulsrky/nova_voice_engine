@@ -29,6 +29,23 @@ bool UdpReceiver::start(int port, OnPacketReceived callback) {
         std::cerr << "HATA: Socket olusturulamadi." << std::endl;
         return false;
     }
+
+    // Socket optimizasyonları
+#ifndef _WIN32
+    int recv_buffer_size = 65536;  // 64KB receive buffer
+    if (setsockopt(socket_, SOL_SOCKET, SO_RCVBUF, &recv_buffer_size, sizeof(recv_buffer_size)) < 0) {
+        std::cerr << "UYARI: Receive buffer size ayarlanamadi." << std::endl;
+    }
+    
+    // Socket timeout ayarları
+    struct timeval timeout;
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 100000; // 100ms timeout
+    if (setsockopt(socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
+        std::cerr << "UYARI: Socket timeout ayarlanamadi." << std::endl;
+    }
+#endif
+
     sockaddr_in server_address{};
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = INADDR_ANY;
@@ -39,7 +56,7 @@ bool UdpReceiver::start(int port, OnPacketReceived callback) {
     }
     is_running_ = true;
     receiver_thread_ = std::thread(&UdpReceiver::receive_loop, this);
-    std::cout << "Receiver " << port << " portunu dinlemeye basladi." << std::endl;
+    std::cout << "Receiver " << port << " portunu dinlemeye basladi (Optimized)." << std::endl;
     return true;
 }
 

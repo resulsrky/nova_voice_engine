@@ -30,6 +30,21 @@ namespace network {
             std::cerr << "HATA: Socket olusturulamadi." << std::endl;
             return false;
         }
+
+        // Socket optimizasyonları
+#ifndef _WIN32
+        int send_buffer_size = 65536;  // 64KB send buffer
+        if (setsockopt(socket_, SOL_SOCKET, SO_SNDBUF, &send_buffer_size, sizeof(send_buffer_size)) < 0) {
+            std::cerr << "UYARI: Send buffer size ayarlanamadi." << std::endl;
+        }
+        
+        // Non-blocking socket
+        int flags = fcntl(socket_, F_GETFL, 0);
+        if (flags >= 0) {
+            fcntl(socket_, F_SETFL, flags | O_NONBLOCK);
+        }
+#endif
+
         server_address_.sin_family = AF_INET;
         server_address_.sin_port = htons(port);
         int ip_result = inet_pton(AF_INET, ip_address.c_str(), &server_address_.sin_addr);
@@ -45,13 +60,27 @@ namespace network {
 #endif
             return false;
         }
-        std::cout << "Sender " << ip_address << ":" << port << " adresine baglanmaya hazir." << std::endl;
+        std::cout << "Sender " << ip_address << ":" << port << " adresine baglanmaya hazir (Optimized)." << std::endl;
         return true;
     }
 
     void UdpSender::send(const core::Packet& packet) {
         auto bytes = packet.to_bytes();
-        sendto(socket_, reinterpret_cast<const char*>(bytes.data()), bytes.size(), 0, (const sockaddr*)&server_address_, sizeof(server_address_));
+        ssize_t result = sendto(socket_, reinterpret_cast<const char*>(bytes.data()), bytes.size(), 
+                               0, (const sockaddr*)&server_address_, sizeof(server_address_));
+        
+        if (result < 0) {
+#ifdef _WIN32
+            int error = WSAGetLastError();
+            if (error != WSAEWOULDBLOCK) {
+                std::cerr << "UDP Send hatası: " << error << std::endl;
+            }
+#else
+            if (errno != EAGAIN && errno != EWOULDBLOCK) {
+                std::cerr << "UDP Send hatası: " << strerror(errno) << std::endl;
+            }
+#endif
+        }
     }
 
     void UdpSender::send(const std::vector<core::Packet>& packets) {

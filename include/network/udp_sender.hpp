@@ -15,6 +15,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <cstring>
 #endif
 
 namespace network {

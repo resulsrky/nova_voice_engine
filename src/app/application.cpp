@@ -46,13 +46,33 @@ void Application::run(const std::string& target_ip, int send_port, int listen_po
 }
 
 void Application::on_audio_captured(const std::vector<int16_t>& pcm_data) {
+    // Frame size validation
+    if (pcm_data.size() != 480) { // 48kHz, 10ms frame
+        std::cerr << "UYARI: Geçersiz frame size: " << pcm_data.size() << std::endl;
+        return;
+    }
+    
     std::vector<int16_t> processed = pcm_data;
-    echo_canceller_->process(processed);
-    noise_suppressor_->process(processed);
-    auto encoded_data = codec_->encode(processed);
-    if (encoded_data.empty()) return;
-    auto packets = slicer_->slice(encoded_data, 1200);
-    sender_->send(packets);
+    
+    // Audio processing pipeline
+    try {
+        echo_canceller_->process(processed);
+        noise_suppressor_->process(processed);
+        
+        auto encoded_data = codec_->encode(processed);
+        if (encoded_data.empty()) {
+            std::cerr << "UYARI: Codec encoding başarısız." << std::endl;
+            return;
+        }
+        
+        // Daha küçük paket boyutu - daha iyi network performance
+        auto packets = slicer_->slice(encoded_data, 1000);
+        if (!packets.empty()) {
+            sender_->send(packets);
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Audio processing hatası: " << e.what() << std::endl;
+    }
 }
 
 void Application::on_packet_received(core::Packet packet) {

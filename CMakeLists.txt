@@ -34,10 +34,12 @@ target_include_directories(voice_engine PRIVATE
 target_link_libraries(voice_engine PRIVATE
         ${OPUS_LIBRARIES}
         ${PORTAUDIO_LIBRARIES}
+        pthread
 )
 
 if(NOT MSVC)
-    target_compile_options(voice_engine PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(voice_engine PRIVATE -Wall -Wextra -Wpedantic -O2)
+    target_compile_definitions(voice_engine PRIVATE _GNU_SOURCE)
 endif()
 
 message(STATUS "Voice Engine projesi başarıyla yapılandırıldı.")
