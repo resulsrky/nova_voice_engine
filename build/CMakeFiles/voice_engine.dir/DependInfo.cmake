@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/raulcto/CLionProjects/nova_voice_engine/src/playback/audio_player.cpp" "CMakeFiles/voice_engine.dir/src/playback/audio_player.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/playback/audio_player.cpp.o.d"
   "/home/raulcto/CLionProjects/nova_voice_engine/src/processing/echo_canceller.cpp" "CMakeFiles/voice_engine.dir/src/processing/echo_canceller.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/processing/echo_canceller.cpp.o.d"
   "/home/raulcto/CLionProjects/nova_voice_engine/src/processing/noise_suppressor.cpp" "CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o.d"
+  "/home/raulcto/CLionProjects/nova_voice_engine/src/processing/voice_activity_detector.cpp" "CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o.d"
   "/home/raulcto/CLionProjects/nova_voice_engine/src/streaming/collector.cpp" "CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o.d"
   "/home/raulcto/CLionProjects/nova_voice_engine/src/streaming/slicer.cpp" "CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o" "gcc" "CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o.d"
   )

@@ -1,7 +1,7 @@
-CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o: \
- /home/raulcto/CLionProjects/nova_voice_engine/src/processing/noise_suppressor.cpp \
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o: \
+ /home/raulcto/CLionProjects/nova_voice_engine/src/processing/voice_activity_detector.cpp \
  /usr/include/stdc-predef.h \
- /home/raulcto/CLionProjects/nova_voice_engine/include/processing/noise_suppressor.hpp \
+ /home/raulcto/CLionProjects/nova_voice_engine/include/processing/voice_activity_detector.hpp \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

@@ -209,10 +209,24 @@ CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raulcto/CLionProjects/nova_voice_engine/src/processing/noise_suppressor.cpp -o CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.s
 
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o: CMakeFiles/voice_engine.dir/flags.make
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o: ../src/processing/voice_activity_detector.cpp
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o: CMakeFiles/voice_engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o -MF CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o.d -o CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o -c /home/raulcto/CLionProjects/nova_voice_engine/src/processing/voice_activity_detector.cpp
+
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/raulcto/CLionProjects/nova_voice_engine/src/processing/voice_activity_detector.cpp > CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.i
+
+CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/raulcto/CLionProjects/nova_voice_engine/src/processing/voice_activity_detector.cpp -o CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.s
+
 CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o: CMakeFiles/voice_engine.dir/flags.make
 CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o: ../src/streaming/collector.cpp
 CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o: CMakeFiles/voice_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o -MF CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o.d -o CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o -c /home/raulcto/CLionProjects/nova_voice_engine/src/streaming/collector.cpp
 
 CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.s: cmake_force
 CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o: CMakeFiles/voice_engine.dir/flags.make
 CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o: ../src/streaming/slicer.cpp
 CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o: CMakeFiles/voice_engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o -MF CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o.d -o CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o -c /home/raulcto/CLionProjects/nova_voice_engine/src/streaming/slicer.cpp
 
 CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.i: cmake_force
@@ -249,6 +263,7 @@ voice_engine_OBJECTS = \
 "CMakeFiles/voice_engine.dir/src/playback/audio_player.cpp.o" \
 "CMakeFiles/voice_engine.dir/src/processing/echo_canceller.cpp.o" \
 "CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o" \
+"CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o" \
 "CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o" \
 "CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o"
 
@@ -265,11 +280,12 @@ voice_engine: CMakeFiles/voice_engine.dir/src/network/udp_sender.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/src/playback/audio_player.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/src/processing/echo_canceller.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o
+voice_engine: CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o
 voice_engine: CMakeFiles/voice_engine.dir/build.make
 voice_engine: CMakeFiles/voice_engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable voice_engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/raulcto/CLionProjects/nova_voice_engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable voice_engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/voice_engine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -369,6 +369,30 @@ src/processing/noise_suppressor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/voice_engine.dir/build.make CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.s
 .PHONY : src/processing/noise_suppressor.cpp.s
 
+src/processing/voice_activity_detector.o: src/processing/voice_activity_detector.cpp.o
+.PHONY : src/processing/voice_activity_detector.o
+
+# target to build an object file
+src/processing/voice_activity_detector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voice_engine.dir/build.make CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o
+.PHONY : src/processing/voice_activity_detector.cpp.o
+
+src/processing/voice_activity_detector.i: src/processing/voice_activity_detector.cpp.i
+.PHONY : src/processing/voice_activity_detector.i
+
+# target to preprocess a source file
+src/processing/voice_activity_detector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voice_engine.dir/build.make CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.i
+.PHONY : src/processing/voice_activity_detector.cpp.i
+
+src/processing/voice_activity_detector.s: src/processing/voice_activity_detector.cpp.s
+.PHONY : src/processing/voice_activity_detector.s
+
+# target to generate assembly for a file
+src/processing/voice_activity_detector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/voice_engine.dir/build.make CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.s
+.PHONY : src/processing/voice_activity_detector.cpp.s
+
 src/streaming/collector.o: src/streaming/collector.cpp.o
 .PHONY : src/streaming/collector.o
 
@@ -456,6 +480,9 @@ help:
 	@echo "... src/processing/noise_suppressor.o"
 	@echo "... src/processing/noise_suppressor.i"
 	@echo "... src/processing/noise_suppressor.s"
+	@echo "... src/processing/voice_activity_detector.o"
+	@echo "... src/processing/voice_activity_detector.i"
+	@echo "... src/processing/voice_activity_detector.s"
 	@echo "... src/streaming/collector.o"
 	@echo "... src/streaming/collector.i"
 	@echo "... src/streaming/collector.s"

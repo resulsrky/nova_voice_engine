@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/voice_engine.dir/src/processing/echo_canceller.cpp.o.d"
   "CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o"
   "CMakeFiles/voice_engine.dir/src/processing/noise_suppressor.cpp.o.d"
+  "CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o"
+  "CMakeFiles/voice_engine.dir/src/processing/voice_activity_detector.cpp.o.d"
   "CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o"
   "CMakeFiles/voice_engine.dir/src/streaming/collector.cpp.o.d"
   "CMakeFiles/voice_engine.dir/src/streaming/slicer.cpp.o"

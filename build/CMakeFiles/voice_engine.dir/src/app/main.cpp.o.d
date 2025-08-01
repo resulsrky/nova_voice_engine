@@ -230,6 +230,7 @@ CMakeFiles/voice_engine.dir/src/app/main.cpp.o: \
  /home/raulcto/CLionProjects/nova_voice_engine/include/processing/echo_canceller.hpp \
  /usr/include/c++/11/cstddef \
  /home/raulcto/CLionProjects/nova_voice_engine/include/processing/noise_suppressor.hpp \
+ /home/raulcto/CLionProjects/nova_voice_engine/include/processing/voice_activity_detector.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/bits/ios_base.h \
  /usr/include/c++/11/bits/locale_classes.h \
